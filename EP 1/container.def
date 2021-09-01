@@ -1,0 +1,16 @@
+Bootstrap: docker
+From: ufscar/ubuntu_mpich:latest
+
+%help
+	Container to run problem of the PI in P1 of CCO-129-7/UFSCar
+
+%files
+	./pi/. /opt
+
+%post
+	echo "Compiling"
+	cd /opt && make
+	cp pi_seq pi_pth pi_omp /usr/bin/
+
+%runscript
+	exec $@
